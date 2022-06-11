@@ -1,7 +1,15 @@
 Skill Assessment
 ================
 
-<!-- Review -->
+
+# Review
+
+<details>
+<summary style="color:blue">
+Click to show
+</summary>
+
+
 
 # The Gender Wage Gap
 
@@ -100,29 +108,27 @@ Follow the next instructions:
     out-of-sample MSE and R2 of both models in a table.
 -   Make a coefficient plot for the sex variable in both models.
 
-<!-- review -->
+</details>
 
-## Comments
+## RVw
 
 -   Data wider format
 -   Training and testing data
--   Instructions:
-    -   Instruccion 1: Si me centro (filtrar los datos SCL == 1 y CLG
-        ==1) en esas 2 variables no podre continuar, en su totalidad del
-        punto 2 al 6 , si lo hago los modelos tendran columnas con
-        valores de 0 en las variables relacionadas con la educacion. Por
-        lo que lo hare con los datos totales.
 
-    -   Instrccion 3 y 4: Todos los datos
-
-    -   Instruccion 7: comparando medias
 
 <!--Instruccion-->
 
 # Solutions
 
-## R
 
+
+## R [(Code)](https://github.com/TJhon/Skills-Assessment/blob/main/ra-r.md)
+
+<details>
+<summary style="color:blue">
+Click to show
+</summary>
+    
 ``` r
 # 
 # install.packages("librarian")
@@ -342,8 +348,15 @@ wage |>
 
 ![](ra-r_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
-## Python
+</details>
+    
+## Python [(Code)](https://github.com/TJhon/Skills-Assessment/blob/main/ra_sa_py.py)
 
+<details>
+<summary style="color:blue">
+Click to show
+</summary>    
+    
 ``` python
 import pandas as pd
 import numpy as np
@@ -445,7 +458,7 @@ tr_wg =  pd.DataFrame(x_tr_wg)
 ts_wg = pd.DataFrame(x_ts_wg)
 
 
-### 
+
 
 ols = ' lwage ~ sex + exp1 + shs + hsg + mw + so + we + occ2 + ind2'
 flex = ' lwage ~ sex+(exp1+exp2+exp3+exp4+shs+hsg +occ2+ind2 + mw + so + we)**2'
@@ -928,14 +941,16 @@ plt.ylabel("Log Wage")
 
 ![png](output_19_1.png)
 
-``` python
-```
+</details>        
 
-``` python
-```
 
-## Julia
+## Julia [(Code)](https://github.com/TJhon/Skills-Assessment/blob/main/ra_sa_jl.jl)
 
+<details>
+<summary style="color:blue">
+Click to show
+</summary>        
+        
 ### Data
 
 ``` julia
@@ -1094,3 +1109,5 @@ ylabel!("Log Wage")
 ```
 
 ![](figures/ra_sa_jl_4_1.png)
+
+</details>
