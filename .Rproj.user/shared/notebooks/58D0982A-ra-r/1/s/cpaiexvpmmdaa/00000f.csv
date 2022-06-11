@@ -1,0 +1,3 @@
+"0","split <- rsample::initial_split(wage, prop = .6, strata = lwage)"
+"0","tr_wg <- training(split)"
+"0","ts_wg <- testing(split)"

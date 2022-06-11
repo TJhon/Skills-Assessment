@@ -1,0 +1,5 @@
+"0","map2_df(.x = list(wg_flex, wg_ols), .y = c(""Basic OLS"", ""Flexible OLS""), tbl) |> 
+  kableExtra
+"
+"2","Error: The pipe operator requires a function call as RHS
+"

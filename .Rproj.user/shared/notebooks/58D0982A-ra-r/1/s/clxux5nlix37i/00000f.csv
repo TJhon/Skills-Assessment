@@ -1,0 +1,7 @@
+"0","wg_ols <- "
+"0","  lm(lwage ~ sex + exp1 + shs + hsg + mw + so + we + occ2 + ind2, data = tr_wg)"
+"0","wg_flex <- "
+"0","  lm("
+"0","    lwage ~ sex+(exp1 + exp2 + exp3 + exp4 + shs + hsg + occ2 + ind2 + mw + so + we)^2"
+"0","    , data = tr_wg"
+"0","    )"

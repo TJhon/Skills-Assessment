@@ -1,0 +1,5 @@
+"0","map2_df(.x = list(wg_flex, wg_ols), .y = c(""Basic OLS"", ""Flexible OLS""), tbl) |> 
+  knitr::kable()
+"
+"2","Warning: prediction from a rank-deficient fit may be misleading"
+"2","Warning: prediction from a rank-deficient fit may be misleading"

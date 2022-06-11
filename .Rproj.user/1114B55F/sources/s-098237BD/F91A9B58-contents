@@ -1,0 +1,99 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+from plotnine import ggplot, aes, geom_linerange, geom_point
+
+import statsmodels.formula.api as smf
+from dfply import *
+
+
+
+from sklearn.model_selection import train_test_split
+
+from sklearn.metrics import mean_squared_error as msqe
+from sklearn.metrics import r2_score as r2
+
+
+
+plt.style.use('_mpl-gallery')
+
+## Prep
+
+wage = pd.read_csv("./data/wage2015_subsample_inference.csv")
+
+print(wage.head(5))
+
+
+
+
+
+## Models
+wage_y = wage['lwage']
+wage_x = wage[['sex', 'exp1', 'exp2', 'exp3', 'exp4', 'shs', 'hsg', 'occ2', 'ind2', 'mw', 'so', 'we']]
+
+
+x_tr_wg, x_ts_wg, y_tr_wg, y_ts_wg = train_test_split(
+  wage_x, wage_y, test_size = .4, random_state = 12
+)
+
+x_tr_wg["lwage"] = y_tr_wg
+x_ts_wg['lwage'] = y_ts_wg
+
+tr_wg =  pd.DataFrame(x_tr_wg) 
+ts_wg = pd.DataFrame(x_ts_wg)
+
+
+### 
+
+ols = ' lwage ~ sex + exp1 + shs + hsg + mw + so + we + occ2 + ind2'
+flex = ' lwage ~ sex+(exp1+exp2+exp3+exp4+shs+hsg +occ2+ind2 + mw + so + we)**2'
+
+ols_reg = smf.ols(ols, data = tr_wg).fit()
+flx_reg = smf.ols(flex, data = tr_wg).fit()
+
+mse =  [
+    msqe(y_tr_wg, ols_reg.predict(x_tr_wg)),
+    msqe(y_ts_wg, ols_reg.predict(x_ts_wg)),
+    msqe(y_tr_wg, flx_reg.predict(x_tr_wg)),
+    msqe(y_ts_wg, flx_reg.predict(x_ts_wg))
+  ]
+
+r_2 =  [
+    r2(y_tr_wg, ols_reg.predict(x_tr_wg)),
+    r2(y_ts_wg, ols_reg.predict(x_ts_wg)),
+    r2(y_tr_wg, flx_reg.predict(x_tr_wg)),
+    r2(y_ts_wg, flx_reg.predict(x_ts_wg))
+  ]
+  
+
+data = {
+  'Models' : ["Basic OLS", "Basic OLS", "Flexible OLS", "Flexible OLS"],
+  'Type' : ["train", "test", "train", "test"]
+  , "mse" : mse
+  , "r2" : r_2
+}
+
+print(pd.DataFrame(data))
+
+
+#### Plot conf
+
+
+tibble(
+  x = 12
+)
+dfply.
+
+coef_df = pd.DataFrame(
+  {
+    "coef": [ols_reg.params.values[[1]], flx_reg.params.values[[1]]],
+    "err": [(ols_reg.params - ols_reg.conf_int()[0])[[1]], (flx_reg.params - flx_reg.conf_int()[0])[[1]]],
+    "model": ["Basic OLS", "Flexible OLS"],
+    "model1": [1, 2]
+  }
+)
+
+ggplot(coef_df) + aes(x="model1", y = "coef") + geom_point()
+
+coef_df.head(4)
