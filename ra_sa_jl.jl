@@ -1,6 +1,3 @@
----
-title: Julia
----
 
 
 using CSV, GLM, Plots
